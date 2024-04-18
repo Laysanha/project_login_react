@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
+# Projeto de Login com React e Firebase
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é um projeto de login simples desenvolvido com React e Firebase. Ele inclui recursos como:
 
-Currently, two official plugins are available:
+- Cadastro de novos usuários com validação de senha
+- Autenticação de usuários existentes
+- Armazenamento de informações do usuário no Firebase Realtime Database
+- Páginas de login, cadastro e página inicial
+- Uso de React Router para navegação entre páginas
+- Estilização básica com CSS e Styled Components
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologias Utilizadas:
 
-## Expanding the ESLint configuration
+- React.js
+- Firebase Authentication
+- Firebase Realtime Database
+- React Router
+- Styled Components
+- HTML5
+- CSS3
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Como usar:
 
-- Configure the top-level `parserOptions` property like this:
+1. Clone este repositório para o seu ambiente local:
+   -Exemplo: git clone https://github.com/seu-usuario/nome-do-repositorio.git  
+3. No diretório do projeto, instale as dependências usando __npm install__ ou __yarn install__.
+4. Configure sua instância do Firebase no arquivo firebase.js com suas credenciais. 
+5. Execute o projeto localmente usando npm start ou yarn start.
+6. Abra o navegador e acesse http://localhost:3000 para visualizar o projeto.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+## Contribuição
+Contribuições são bem-vindas! Se você encontrar algum problema ou tiver sugestões para melhorias
+d/f9/18/edf91820f45ec88c7dd99d689d36b7e8.gif))
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<img src="https://i.pinimg.com/originals/ed/f9/18/edf91820f45ec88c7dd99d689d36b7e8.gif" alt="Gif de uma garota trabalhando no pc]([https://exemplo.com/logo.png">
