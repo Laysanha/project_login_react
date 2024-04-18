@@ -1,13 +1,22 @@
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { signOut } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from '../main'
+import { Navigate } from "react-router-dom";
 
 export const HomePage = () => {
     const [openModal, setOpenModal] = useState(true);
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if(!user){
+                return <Navigate to="/login"/>
+           }
+        })
+        return unsubscribe
+    })
+
     async function handleDeslogar(){
-        console.log(auth.currentUser)
         try {
             await signOut(auth);
         } catch (err) {
@@ -37,8 +46,6 @@ export const HomePage = () => {
                     <ul>
                         <li> Projeto React </li> 
                         <div>
-                            <li> Nome </li> 
-                            <li> E-mail </li> 
                             <button type="button" onClick={() => {handleDeslogar()}}>Desconectar</button>
                         </div>
                     </ul> 
@@ -46,6 +53,5 @@ export const HomePage = () => {
                 <h1>Seja Bem-Vindo(a)</h1>
             </div>
         </>
-
     )
 }
