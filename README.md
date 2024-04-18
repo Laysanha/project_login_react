@@ -29,7 +29,6 @@ Este é um projeto de login simples desenvolvido com React e Firebase. Ele inclu
 6. Abra o navegador e acesse http://localhost:3000 para visualizar o projeto.
 
 ## Contribuição
-Contribuições são bem-vindas! Se você encontrar algum problema ou tiver sugestões para melhorias
-d/f9/18/edf91820f45ec88c7dd99d689d36b7e8.gif))
+Contribuições são bem-vindas! Se você encontrar algum problema ou tiver sugestões para melhorias.
 
 <img src="https://i.pinimg.com/originals/ed/f9/18/edf91820f45ec88c7dd99d689d36b7e8.gif" alt="Gif de uma garota trabalhando no pc]([https://exemplo.com/logo.png">
