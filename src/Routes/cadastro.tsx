@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ValidationMessage } from "../Components/ValidationMessage";
 import { auth } from '../main'
-import { set } from "firebase/database";
 
 export const Cadastro = () => {
     const [nome, setNome] =  useState("");
@@ -31,33 +30,38 @@ export const Cadastro = () => {
         const specialCharValid = /[!@#$%^&*(),.?":{}|<>]/.test(password)
         const upperCaseValid = /[A-Z]/.test(password)
 
+        setIsLengthValid(lengthValid)
+        setIsNumberValid(numberValid)
+        setIsSpecialCharValid(specialCharValid)
+        setIsUpperCaseValid(upperCaseValid)
         
-        if (setIsLengthValid && setIsNumberValid && setIsSpecialCharValid && setIsUpperCaseValid){
-            setIsLengthValid(lengthValid)
-            setIsNumberValid(numberValid)
-            setIsSpecialCharValid(specialCharValid)
-            setIsUpperCaseValid(upperCaseValid)
-            
-            if (password != confirmaPassword){
-                setErrorMessage("As senhas não coincidem.")
-                setError(true)
-                return  
-            }
-    
-            createUserWithEmailAndPassword(auth, email, password)
-            .then(async (userCredential) => {
-                const user = userCredential.user;
-                const userId = user.uid;
-                await storeUserInFirestore(userId, user.email, nome, sobrenome, nascimento, password)
-                navigate("/login");
-            }).catch((error) => {
-                console.log(error);
-            })
-        }        
+        if (password != confirmaPassword){
+            setErrorMessage("As senhas não coincidem.")
+            setError(true)
+            return  
+        }
+        
+        if (!(lengthValid && numberValid && specialCharValid && upperCaseValid)){
+            setErrorMessage("A senha não atende aos critérios mínimos.")
+            setError(true);
+            return;
+        } 
+        
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+            const user = userCredential.user;
+            const userId = user.uid;
+            await storeUserInFirestore(userId, user.email, nome, sobrenome, nascimento, password)
+            navigate("/homepage");
+        } catch (error) {
+            console.log(error)
+        }
     }
     async function storeUserInFirestore(uid: string, email: string | null, nome: string, sobrenome: string, nascimento: string, hashPassword: string){
         const userReference = doc(db, "users", uid)
         await setDoc(userReference, {uid, email, nome, sobrenome, nascimento, hashPassword})
+
+        localStorage.setItem('isAuthenticated', 'true');
     }
 
     return (

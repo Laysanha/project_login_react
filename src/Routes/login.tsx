@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
@@ -15,8 +14,6 @@ export const Login = () => {
         try{
             const userDoc = await getUserByEmail(email);    
             
-            console.log(auth.currentUser)
-
             if (userDoc?.exists() && userDoc.data()){
                 signInWithEmailAndPassword(auth, email, password)
                 .finally(() => {
@@ -59,6 +56,7 @@ export const Login = () => {
         })
     }
 
+    
     return (
         <div>
             <h1>Login</h1>
@@ -83,3 +81,4 @@ export const Login = () => {
         </div>
     )
 };
+

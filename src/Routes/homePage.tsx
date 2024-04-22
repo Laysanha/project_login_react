@@ -1,24 +1,24 @@
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { auth } from '../main'
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/authContext";
 
 export const HomePage = () => {
     const [openModal, setOpenModal] = useState(true);
+    const navigate = useNavigate();
+    const user = useContext(AuthContext);
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            if(!user){
-                return <Navigate to="/login"/>
-           }
-        })
-        return unsubscribe
-    })
-
+        if (!user) {
+            navigate("/login");
+        }
+    }, [navigate, user]);
     async function handleDeslogar(){
         try {
             await signOut(auth);
+            localStorage.removeItem('user')
         } catch (err) {
             console.log(err);
         }
@@ -53,5 +53,6 @@ export const HomePage = () => {
                 <h1>Seja Bem-Vindo(a)</h1>
             </div>
         </>
+
     )
 }

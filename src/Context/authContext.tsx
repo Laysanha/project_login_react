@@ -3,26 +3,25 @@ import { createContext, useEffect, useState, PropsWithChildren } from "react"
 
 export const AuthContext = createContext<User | null>(null)
 
-export const AuthContextProvider   = ({ children }: PropsWithChildren) => {
+export const AuthContextProvider = ({ children }: PropsWithChildren) => {
    const auth = getAuth();
    const [user, setUser] = useState<User | null>(null);
-   // const [loading, setLoading] = useState(true)
 
    useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-         // setLoading(false)
-         if(currentUser) setUser(currentUser)
-          else{setUser(null)}
-      });
-         return () => {
-          if(unsubscribe) unsubscribe();
-       }
-   })
+         setUser(currentUser)
+         if (currentUser) {
+            localStorage.setItem('user', JSON.stringify(currentUser))
+         } else {
+            localStorage.removeItem('user')
+         }
+      })
+      return () => {
+         if(unsubscribe) unsubscribe();
+      }
+   }, [auth])
       
    return <AuthContext.Provider value={user}>
-      { 
-      //!loading && 
-         children 
-      }
+      { children }
    </AuthContext.Provider>
 }
